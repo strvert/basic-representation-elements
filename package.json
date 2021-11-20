@@ -38,7 +38,7 @@
     "typescript",
     "lit"
   ],
-  "author": "Google LLC",
+  "author": "strvert",
   "license": "BSD-3-Clause",
   "dependencies": {
     "lit": "^2.0.0"

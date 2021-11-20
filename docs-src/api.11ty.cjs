@@ -12,7 +12,7 @@ module.exports = class Docs {
 
   render(data) {
     const manifest = data.api['11tydata'].customElements;
-    const elements = manifest.modules.reduce(
+    const elements = manifest.tags.reduce(
       (els, module) =>
         els.concat(
           module.declarations?.filter((dec) => dec.customElement) ?? []
@@ -24,7 +24,7 @@ module.exports = class Docs {
      ${elements
        .map(
          (element) => `
-       <h2>&lt;${element.tagName}></h2>
+       <h2>&lt;${element.name}></h2>
        <div>
          ${element.description}
        </div>
@@ -37,7 +37,7 @@ module.exports = class Docs {
          'Properties',
          ['name', 'attribute', 'description', 'type.text', 'default'],
          element.members.filter((m) => m.kind === 'field')
-       )}  
+       )}
        ${renderTable(
          'Methods',
          ['name', 'parameters', 'description', 'return.type.text'],
@@ -52,12 +52,12 @@ module.exports = class Docs {
              ),
            }))
        )}
-       ${renderTable('Events', ['name', 'description'], element.events)}    
+       ${renderTable('Events', ['name', 'description'], element.events)}
        ${renderTable(
          'Slots',
          [['name', '(default)'], 'description'],
          element.slots
-       )}  
+       )}
        ${renderTable(
          'CSS Shadow Parts',
          ['name', 'description'],
